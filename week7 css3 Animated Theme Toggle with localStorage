@@ -1,0 +1,65 @@
+---index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Theme Toggle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Digitech.inc</h1>
+    <button id="toggleBtn">Toggle Theme</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+---style.css
+
+body {
+    transition: background-color 0.5s ease, color 0.5s ease;
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  body.dark-mode {
+    background-color: #222;
+    color: #eee;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  button:hover {
+    transform: scale(1.1);
+  }
+
+
+---script.js
+
+const toggleBtn = document.getElementById('toggleBtn');
+const body = document.body;
+
+// Load theme preference from localStorage
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme === 'dark') {
+  body.classList.add('dark-mode');
+}
+
+// Function to toggle theme
+toggleBtn.addEventListener('click', () => {
+  body.classList.toggle('dark-mode');
+  const newTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+  localStorage.setItem('theme', newTheme);
+});
+
